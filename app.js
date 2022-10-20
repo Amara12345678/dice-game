@@ -1,28 +1,49 @@
-// toglogchiin eeljiig hadgalah huwsagch, 1dugeer toglogchiig 0, 2dugaar toglogchiig 1 gej temdgely
-var activePlayer = 0;
-//toglogchdiin tsugluulsan onoog hadgalah huwisagch
-var scores = [0, 0];
-//toglogchiin eeljindee tsugluulj baigaa onoog hadgalah
-var roundScore = 0;
-//shoonii ali talaaraa buusniig hadgalah huwisagch 1ees 6 huwshagchiig sanamsarguuger vvsgej ugnu
-var diceNumber = Math.floor(Math.random() * 6) + 1;
-
-// document.querySelector("#score-0").textContent = dice;
-
-// document.querySelector("#score-1").textContent = dice;
-
-//togloom ehlehed beltgey
-document.getElementById("score-0").textContent = "0";
-
-document.getElementById("score-1").textContent = "0";
-
-document.getElementById("current-0").textContent = "0";
-
-document.getElementById("current-1").textContent = "0";
-
+//toglomii global huwisagchid
+//idwehitei toglogch
+var activePlayer;
+//tsugluulsan onoo
+var scores;
+//tsugluulj bgaa onoo
+var roundScore;
+//shoo
 var diceDom = document.querySelector(".dice");
 
-diceDom.style.display = "none";
+//togloomiig ehluulne
+initGame();
+//togloomiig shineer ehleh function
+function initGame() {
+  // toglogchiin eeljiig hadgalah huwsagch, 1dugeer toglogchiig 0, 2dugaar toglogchiig 1 gej temdgely
+  activePlayer = 0;
+  //toglogchdiin tsugluulsan onoog hadgalah huwisagch
+  scores = [0, 0];
+  //toglogchiin eeljindee tsugluulj baigaa onoog hadgalah
+  roundScore = 0;
+  //shoonii ali talaaraa buusniig hadgalah huwisagch 1ees 6 huwshagchiig sanamsarguuger vvsgej ugnu
+  var diceNumber = Math.floor(Math.random() * 6) + 1;
+
+  // document.querySelector("#score-0").textContent = dice;
+
+  // document.querySelector("#score-1").textContent = dice;
+
+  //togloom ehlehed beltgey
+  document.getElementById("score-0").textContent = "0";
+  document.getElementById("score-1").textContent = "0";
+  document.getElementById("current-0").textContent = "0";
+  document.getElementById("current-1").textContent = "0";
+
+  //toglogchidiin neriig butsaaj gargah
+  document.getElementById("name-0").textContent = "Player-1";
+  document.getElementById("name-1").textContent = "Player-2";
+
+  document.querySelector(".player-0-panel").classList.remove("winner");
+  document.querySelector(".player-1-panel").classList.remove("winner");
+
+  document.querySelector(".player-0-panel").classList.remove("active");
+  document.querySelector(".player-1-panel").classList.remove("active");
+
+  document.querySelector(".player-0-panel").classList.add("active");
+}
+
 //shoog shideh event listner
 document.querySelector(".btn-roll").addEventListener("click", function () {
   //1ees 6 dotor sanamsargui awna
@@ -49,7 +70,7 @@ document.querySelector(".btn-hold").addEventListener("click", function () {
   document.getElementById("score-" + activePlayer).textContent =
     scores[activePlayer];
   //ug toglogch hojson esehiig shsalgah onoo 100gaas ih
-  if (scores[activePlayer] >= 100) {
+  if (scores[activePlayer] >= 10) {
     //yalagch texiig haruulna
     document.getElementById("name-" + activePlayer).textContent = "YOU WIN";
     document
@@ -84,5 +105,5 @@ function switchToNextPlayer() {
 }
 
 //shine togloom ehliuuleh towchnii event listner
-
-document.querySelector(".btn-new").addEventListener("click", function () {});
+//new game
+document.querySelector(".btn-new").addEventListener("click", initGame);
